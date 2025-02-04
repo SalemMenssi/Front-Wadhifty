@@ -1,0 +1,143 @@
+.footer-container {
+  background-color: #0077b6;
+  display: flex;
+  margin-top: 148px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 0 0px;
+}
+
+.footer-content {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.footer-left {
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.footer-title {
+  color: var(--color-gray-10, #fff);
+  font: 800 61px Montserrat, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.footer-images {
+  display: flex;
+  margin-top: 29px;
+  align-items: start;
+  gap: 15px;
+}
+.footer-icon {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 35px;
+  margin-top: 4px;
+}
+.footer-large-icon {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 40px;
+  align-self: stretch;
+  z-index: 10;
+}
+.footer-right {
+  flex-grow: 1;
+  flex-basis: auto;
+  padding: 0 20px;
+}
+
+.footer-links {
+  gap: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 23%;
+  margin-left: 0px;
+}
+
+.footer-category {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+}
+
+.footer-category-title {
+  color: var(--color-gray-10, #fff);
+  font: 500 20px Noto Sans, sans-serif;
+}
+.footer-category-item {
+  font-family: Noto Sans, sans-serif;
+  margin-top: 15px;
+}
+.footer-contact-item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 15px;
+}
+.footer-contact-icon {
+  object-fit: auto;
+  object-position: center;
+  width: 25px;
+  height: 25px;
+}
+.footer-contact-info {
+  font-family: Noto Sans, sans-serif;
+}
+.footer-divider {
+  width: 100%;
+
+  height: 0px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-links-small {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  align-items: center;
+  gap: 25px;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  margin-block: 15px;
+}
+
+.footer-link-item {
+  white-space: nowrap;
+  display: inline-block;
+}
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  padding-block: 10px;
+}
+
+.footer-logo {
+  object-fit: auto;
+  object-position: center;
+  width: 16px;
+  margin-right: 5px;
+}
+.footer-copyright {
+  font-size: 14px;
+}
