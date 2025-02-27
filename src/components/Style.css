@@ -211,8 +211,8 @@ b {
   border-radius: 30px;
   padding: 1em 2em;
   margin: 10px;
-  max-width: 18em;
-
+  max-width: 22em;
+  min-width: 22em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -406,8 +406,14 @@ b {
 }
 
 @media (max-width: 768px) {
+  .App {
+    overflow-x: hidden;
+  }
   .hamburger {
     display: block;
+  }
+  .navbar {
+    width: 95%;
   }
   .nav-links {
     display: none;
@@ -431,6 +437,26 @@ b {
     margin-left: 0;
   }
   .bar {
-    flex-direction: column;
+    padding: 0;
+    align-items: center;
+    width: 102%;
+  }
+  .bar-element {
+    transform: scale(0.8);
+  }
+  .left-box {
+    display: none;
+  }
+  .right-content h1 {
+    font-size: 1.5rem;
+  }
+  .right-content p {
+    font-size: 14px;
+  }
+  .join-button {
+    width: 30%;
+  }
+  .wrapper {
+    width: 100vw;
   }
 }

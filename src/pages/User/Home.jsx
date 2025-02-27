@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "../styles/home.css";
-
+import { useNavigate, useNavigation } from "react-router-dom";
 import image from "../../Assets/Images/land.svg";
 import Button from "../../components/Button";
 import LandBar from "../../components/LandBar";
@@ -38,9 +38,9 @@ const categories = [
 
 const Home = () => {
   const [jobs, setJobs] = useState([]);
-
+  const navigation = useNavigate();
   const handleClick = () => {
-    alert("Button clicked!");
+    navigation("/login");
   };
 
   const GetJobs = async () => {

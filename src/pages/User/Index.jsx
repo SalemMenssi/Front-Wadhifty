@@ -9,7 +9,7 @@ import Contact from "./Contact";
 
 const Index = () => {
   return (
-    <div>
+    <div className="wrapper">
       <NavBar />
       <Routes>
         <Route index element={<Home />} />

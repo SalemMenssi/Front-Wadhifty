@@ -1,1 +1,1 @@
-export const URL = "http://51.75.22.254";
+export const URL = "https://api.wadhifty.com";

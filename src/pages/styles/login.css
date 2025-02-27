@@ -134,7 +134,10 @@
   }
   .login-image,
   .login-form {
-    min-width: 100%;
     max-width: none;
+    justify-content: flex-end;
+  }
+  .login-image .clip {
+    display: none;
   }
 }
