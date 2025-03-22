@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/profile.css";
 
 import notif from "../../Assets/Icons/notification-bing.png";
@@ -7,220 +7,191 @@ import Verification from "../../components/Modal/Verification";
 import NotificationsModal from "../../components/Modal/NotificationsModal";
 import SidePub from "../../components/SidePub";
 import Button from "../../components/Button";
-import { useEffect } from "react";
+
 import { changeResume, getUserById, updateUser } from "../../Utility/UserAPI";
 import { jwtDecode } from "jwt-decode";
 import { uploadPDF } from "../../Utility/FilesAPI";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
-  const profile = {
-    fullName: "Amanda Smith",
-    nickname: "Mandy",
-    phoneNumber: "123-456-7890",
-    country: "USA",
-    language: "English",
-    speciality: "Software Engineering",
-    email: "amanda.smith@example.com",
-    newPassword: "",
-  };
-  const [currentUsers, setCurrentUsers] = useState({});
+  const { t } = useTranslation();
+
+  const [user, setUser] = useState(null);
   const [formData, setFormData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [cv, setCv] = useState(null);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+      const token = localStorage.getItem("authToken");
+      if (!token) throw new Error("No authentication token found");
+
+      const decodedToken = jwtDecode(token);
+      const currentId = decodedToken.id;
+      const { user } = await getUserById(currentId);
+
+      setUser(user);
+      setFormData(user);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSave = async () => {
-    await updateUser(formData._id, formData);
-    console.log("Changes saved:", formData);
-    await getCurrent();
-    handleClose();
+    if (!formData) return;
+
+    try {
+      await updateUser(formData._id, formData);
+      setMessage("Profile updated successfully!");
+      fetchUserData();
+      setOpen(false);
+    } catch (error) {
+      console.error("Update error:", error);
+      setMessage("Failed to update profile. Try again.");
+    }
   };
 
   const handleCvChange = (e) => {
     setCv(e.target.files[0]);
   };
+
   const handleUpload = async () => {
     document.getElementById("cvInput").click();
+    if (!cv) return;
 
     const formData = new FormData();
-    formData.append("pdf", cv); // Ensure the key matches the backend's expected field name
+    formData.append("pdf", cv);
 
     setUploading(true);
     setMessage("");
-    const token = await localStorage.getItem("authToken");
-    const decodedToken = jwtDecode(token);
-    const currentId = decodedToken.id;
+
     try {
+      const token = localStorage.getItem("authToken");
+      const decodedToken = jwtDecode(token);
+      const currentId = decodedToken.id;
+
       const response = await uploadPDF(formData);
       await changeResume(currentId, response.file._id);
       setMessage("Upload successful!");
-      console.log("Upload response:", response);
     } catch (error) {
-      setMessage("Upload failed. Please try again.");
       console.error("Upload error:", error);
+      setMessage("Upload failed. Please try again.");
     } finally {
       setUploading(false);
     }
   };
 
-  const handleOpenNotifications = () => setNotificationsOpen(true);
-  const handleCloseNotifications = () => setNotificationsOpen(false);
-
-  const getCurrent = async () => {
-    const token = localStorage.getItem("authToken");
-    const decodedToken = jwtDecode(token);
-    const currentId = decodedToken.id;
-    const data = await getUserById(currentId);
-    setCurrentUsers(data.user);
-    setFormData(data.user);
-  };
-
-  useEffect(() => {
-    getCurrent();
-  }, []);
+  if (loading) return <p>{t("loading-profile")}</p>;
 
   return (
     <div className="profile">
       <div className="top-profile">
         <div className="info-profile">
-          <h4>Welcome, Amanda</h4>
-          <p>Tue, 07 June 2022</p>
+          <h4>
+            {t("welcome-profile")}, {formData?.fullName || "User"}
+          </h4>
+          <p>{new Date().toLocaleDateString()}</p>
         </div>
-        <span className="notif" onClick={handleOpenNotifications}>
-          <img src={notif} alt="notif" />
+        <span className="notif" onClick={() => setNotificationsOpen(true)}>
+          <img src={notif} alt={t("notif-icon")} />
         </span>
       </div>
+
       <div className="profile-container">
         <div className="bar-liniar"></div>
         <div className="top-profile-container">
           <div className="profile-header">
-            <img src={avatar} alt="Profile" className="profile-img" />
+            <img
+              src={avatar}
+              alt={t("profile-header")}
+              className="profile-img"
+            />
             <div className="info-profile">
-              <h2 style={{ textAlign: "justify" }}>
-                {formData && formData.fullName}
-              </h2>
-              <p style={{ textAlign: "justify" }}>
-                {formData && formData.email}
-              </p>
+              <h2>{formData?.fullName}</h2>
+              <p>{formData?.email}</p>
             </div>
           </div>
           <div className="form-actions">
-            <Button text="Save Changes" onClick={handleOpen} />
+            <Button
+              text={t("save-changes-profile")}
+              onClick={() => setOpen(true)}
+            />
           </div>
         </div>
+
         <form className="profile-form">
           <div className="form-column">
-            <div className="form-group">
-              <label htmlFor="fullName">Full Name</label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={formData && formData.fullName}
-                onChange={handleChange}
-                placeholder="Enter your full name"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="nickname">Nickname</label>
-              <input
-                type="text"
-                id="nickname"
-                name="username"
-                value={formData && formData.username}
-                onChange={handleChange}
-                placeholder="Enter your nickname"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="phoneNumber">Phone Number</label>
-              <input
-                type="text"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={formData && formData.phoneNumber}
-                onChange={handleChange}
-                placeholder="Enter your phone number"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="country">Country</label>
-              <input
-                type="text"
-                id="country"
-                name="country"
-                value={formData && formData.country}
-                onChange={handleChange}
-                placeholder="Enter your country"
-              />
-            </div>
+            {[
+              { id: "fullName", label: t("full-name-profile") },
+              { id: "username", label: t("nickname-profile") },
+              { id: "phoneNumber", label: t("phone-number-profile") },
+              { id: "country", label: t("country-profile") },
+            ].map(({ id, label }) => (
+              <div className="form-group" key={id}>
+                <label htmlFor={id}>{label}</label>
+                <input
+                  type="text"
+                  id={id}
+                  name={id}
+                  value={formData?.[id] || ""}
+                  onChange={handleChange}
+                  placeholder={label}
+                />
+              </div>
+            ))}
           </div>
+
           <div className="form-column">
-            <div className="form-group">
-              <label htmlFor="language">Language</label>
-              <input
-                type="text"
-                id="language"
-                name="language"
-                value={formData && formData.language}
-                onChange={handleChange}
-                placeholder="Enter your language"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="speciality">Speciality</label>
-              <input
-                type="text"
-                id="speciality"
-                name="speciality"
-                value={formData && formData.speciality}
-                onChange={handleChange}
-                placeholder="Enter your speciality"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData && formData.email}
-                onChange={handleChange}
-                placeholder="Enter your email"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="newPassword">New Password</label>
-              <input
-                type="password"
-                id="newPassword"
-                name="newPassword"
-                value={formData && formData.newPassword}
-                onChange={handleChange}
-                placeholder="Enter a new password"
-              />
-            </div>
+            {[
+              { id: "language", label: t("language-profile") },
+              { id: "speciality", label: t("speciality-profile") },
+              { id: "email", label: t("email-profile") },
+              {
+                id: "newPassword",
+                label: t("new-password-profile"),
+                type: "password",
+              },
+            ].map(({ id, label, type = "text" }) => (
+              <div className="form-group" key={id}>
+                <label htmlFor={id}>{label}</label>
+                <input
+                  type={type}
+                  id={id}
+                  name={id}
+                  value={formData?.[id] || ""}
+                  onChange={handleChange}
+                  placeholder={label}
+                />
+              </div>
+            ))}
           </div>
         </form>
+
         <div className="bottom-profile">
           <div className="form-actions">
             <Button
               text={
-                formData && formData.resume ? "Update Resume" : "Upload Resume"
+                formData?.resume
+                  ? t("update-resume-profile")
+                  : t("upload-resume-profile")
               }
               onClick={handleUpload}
             />
-
             <input
               type="file"
               id="cvInput"
@@ -230,19 +201,22 @@ const Profile = () => {
           </div>
           {cv && (
             <div className="cv-details">
-              <p>Uploaded CV: {cv.name}</p>
+              <p>
+                {t("uploaded-cv-profile")}: {cv.name}
+              </p>
             </div>
           )}
         </div>
       </div>
+
       <Verification
         open={open}
-        handleClose={handleClose}
+        handleClose={() => setOpen(false)}
         handleSave={handleSave}
       />
       <NotificationsModal
         open={notificationsOpen}
-        handleClose={handleCloseNotifications}
+        handleClose={() => setNotificationsOpen(false)}
       />
       <SidePub />
     </div>

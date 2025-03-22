@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -17,6 +18,8 @@ const style = {
 };
 
 const Verification = ({ open, handleClose, handleSave }) => {
+  const { t } = useTranslation(); // Initialize translation hook
+
   return (
     <Modal
       open={open}
@@ -26,10 +29,10 @@ const Verification = ({ open, handleClose, handleSave }) => {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Confirm Changes
+          {t("confirm_changes")}
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          Are you sure you want to save these changes?
+          {t("confirm_message")}
         </Typography>
         <div
           style={{
@@ -39,10 +42,10 @@ const Verification = ({ open, handleClose, handleSave }) => {
           }}
         >
           <Button onClick={handleSave} sx={{ mt: 2 }}>
-            Yes, Save
+            {t("yes_save")}
           </Button>
           <Button onClick={handleClose} sx={{ mt: 2, ml: 2 }}>
-            Cancel
+            {t("cancel")}
           </Button>
         </div>
       </Box>

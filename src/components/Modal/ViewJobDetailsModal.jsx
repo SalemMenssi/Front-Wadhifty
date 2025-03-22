@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogTitle,
@@ -20,6 +21,8 @@ import {
 import { applyForJob } from "../../Utility/ApplicationsAPI";
 
 const ViewJobDetailsModal = ({ user, open, handleClose, job }) => {
+  const { t } = useTranslation(); // Initialize translation hook
+
   const handleApply = async () => {
     await applyForJob({ jobId: job._id, userId: user._id });
     handleClose();
@@ -30,7 +33,7 @@ const ViewJobDetailsModal = ({ user, open, handleClose, job }) => {
       <Paper elevation={3} style={{ padding: "20px", borderRadius: "10px" }}>
         <DialogTitle>
           <Typography variant="h5" fontWeight="bold" color="primary">
-            {job.company}
+            {t("job_details")}
           </Typography>
         </DialogTitle>
         <DialogContent>
@@ -51,7 +54,7 @@ const ViewJobDetailsModal = ({ user, open, handleClose, job }) => {
           <Box display="flex" alignItems="center" gap={1} mb={2}>
             <FontAwesomeIcon icon={faCalendarAlt} color="#28A745" />
             <Typography variant="subtitle2" color="textSecondary">
-              Posted on: {new Date(job.postedAt).toLocaleDateString()}
+              {t("posted_on")}: {new Date(job.postedAt).toLocaleDateString()}
             </Typography>
           </Box>
 
@@ -67,11 +70,11 @@ const ViewJobDetailsModal = ({ user, open, handleClose, job }) => {
 
         <DialogActions>
           <Button onClick={handleApply} variant="contained" color="success">
-            Apply Now
+            {t("apply_now")}
           </Button>
 
           <Button onClick={handleClose} variant="contained" color="primary">
-            Close
+            {t("close")}
           </Button>
         </DialogActions>
       </Paper>

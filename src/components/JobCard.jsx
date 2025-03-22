@@ -46,7 +46,7 @@ const JobCard = ({ job }) => {
     <div className="job-card">
       <div className="job-header">
         <div className="job-info">
-          <h3 className="company-name">{job.company}</h3>
+          <p className="job-category">{job.category}</p>
           <p className="location">
             <img src={locationIcon} alt="Location Icon" />
             {job.location}
@@ -55,7 +55,6 @@ const JobCard = ({ job }) => {
       </div>
 
       <div className="job-details">
-        <p className="job-category">{job.category}</p>
         <p className="job-description">{job.description}</p>
       </div>
 

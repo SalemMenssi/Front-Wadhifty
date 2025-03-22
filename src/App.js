@@ -7,6 +7,7 @@ import IndexAdmin from "./pages/Admin/Index";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { getUserById } from "./Utility/UserAPI";
+import "./i18n";
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);

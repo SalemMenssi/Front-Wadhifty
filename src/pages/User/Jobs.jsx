@@ -1,33 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import "../styles/jobs.css";
 import SearchBar from "../../components/SearchBar";
 import JobBox from "../../components/JobBox";
 import CategoryList from "../../components/CategoryList";
 import { Pagination } from "@mui/material";
-import { useEffect } from "react";
-import { useState } from "react";
 import { getAllJobs } from "../../Utility/JobsAPI";
 
-const categories = [
-  { name: "Software", jobCount: 120 },
-  { name: "Design", jobCount: 80 },
-  { name: "Marketing", jobCount: 60 },
-  { name: "Finance", jobCount: 45 },
-  { name: "Software", jobCount: 120 },
-  { name: "Design", jobCount: 80 },
-  { name: "Marketing", jobCount: 60 },
-  { name: "Finance", jobCount: 45 },
-  { name: "Software", jobCount: 120 },
-  { name: "Design", jobCount: 80 },
-  { name: "Marketing", jobCount: 60 },
-  { name: "Finance", jobCount: 45 },
-  { name: "Software", jobCount: 120 },
-  { name: "Design", jobCount: 80 },
-  { name: "Design", jobCount: 80 },
-];
-
 const Jobs = () => {
+  const { t } = useTranslation();
   const [jobs, setJobs] = useState([]);
+
   const GetJobs = async () => {
     const data = await getAllJobs();
     setJobs(data);
@@ -35,29 +18,22 @@ const Jobs = () => {
 
   useEffect(() => {
     GetJobs();
-  }, [jobs]);
+  }, []);
 
   return (
     <div className="jobs">
       <div className="header-jobs">
-        <h1>
-          “Find the Perfect Job
-          <br />
-          Today!”
-        </h1>
+        <h1>{t("jobs-title")}</h1>
       </div>
-      <h2 style={{ marginBottom: "1em" }}>Looking for a job now</h2>
-      <p>
-        Type in the name of the position, company or job category you are
-        looking for
-      </p>
+      <h2 style={{ marginBottom: "1em" }}>{t("jobs-subtitle")}</h2>
+      <p>{t("jobs-description")}</p>
       <div className="column">
         <SearchBar />
       </div>
-      <h2 style={{ marginBottom: "1em" }}>Choose Our Available Jobs</h2>
-      <p>Find the following job that suits you and apply now</p>
-      <CategoryList categories={categories} />
-      <h2 style={{ marginBottom: "1em" }}>Available Jobs</h2>
+      <h2 style={{ marginBottom: "1em" }}>{t("jobs-choose-title")}</h2>
+      <p>{t("jobs-choose-description")}</p>
+      <CategoryList categories={[]} />
+      <h2 style={{ marginBottom: "1em" }}>{t("jobs-available-title")}</h2>
       <JobBox data={jobs} />
       <div className="pagination-index">
         <Pagination count={10} color="primary" />
