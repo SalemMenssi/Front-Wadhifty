@@ -125,7 +125,7 @@ const Register = () => {
       </div>
       <div className="login-image">
         <div className="clip"></div>
-        <img src={image} alt="Login" />
+        {/* <img src={image} alt="Login" /> */}
       </div>
     </div>
   );

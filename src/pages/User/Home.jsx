@@ -57,9 +57,6 @@ const Home = () => {
       </div>
       <LandBar />
       <div className="section">
-        <h2>{t("section_title")}</h2>
-        <p className="link-style">{t("neuralink_text")}</p>
-        <p>{t("personalization_text")}</p>
         <div className="box">
           <div className="box-card">
             <img src={applayIMG} alt="apply" />

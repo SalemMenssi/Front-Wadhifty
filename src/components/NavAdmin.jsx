@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Style.css";
-import logo from "../Assets/Icons/theme2.png";
+import logo from "../Assets/Images/newLogo.png";
+
 import avatar from "../Assets/Images/avatar.jpg";
 import { Link, useNavigate } from "react-router-dom";
 
