@@ -38,10 +38,10 @@ function App() {
 
     checkAuth();
 
-    const intervalId = setInterval(checkAuth, 60); // 5 minutes
+    const intervalId = setInterval(checkAuth, 1000); // 5 minutes
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [isAdmin]);
 
   return (
     <div className="App">

@@ -8,7 +8,7 @@ import avatar from "../Assets/Images/avatar.jpg";
 const NavBar = () => {
   const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   const navigation = useNavigate();
 
   // Get initial language from i18next
@@ -37,7 +37,7 @@ const NavBar = () => {
     const intervalId = setInterval(checkAuth, 5000); // Check every 5 seconds
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [isAuth]);
 
   // 🛠 Listen for language changes and update the state
   useEffect(() => {
