@@ -6,8 +6,10 @@ import FacebookIcon from "../Assets/Icons/bi_facebook.svg";
 import { login } from "../Utility/UserAPI";
 import { useNavigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -15,7 +17,7 @@ const Login = () => {
   const navigation = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Prevent page reload on form submit
+    e.preventDefault();
 
     const userData = { email, password };
 
@@ -26,13 +28,9 @@ const Login = () => {
         navigation("/");
       }
     } catch (error) {
-      setErrorMessage(error.response?.data?.msg || "Something went wrong!");
+      setErrorMessage(error.response?.data?.msg || t("login_error_default"));
       setShowAlert(true);
-
-      // Hide the alert after 3 seconds
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 3000); // 3000ms = 3 seconds
+      setTimeout(() => setShowAlert(false), 3000);
     }
     setEmail("");
     setPassword("");
@@ -48,29 +46,27 @@ const Login = () => {
         )}
       </div>
       <div className="login-form">
-        <h2>Login</h2>
+        <h2>{t("login_title")}</h2>
         <form onSubmit={handleLogin}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t("login_email_label")}</label>
           <input
             type="email"
             id="email"
-            placeholder="Enter your email"
+            placeholder={t("login_email_placeholder")}
             required
             value={email}
-            onChange={(e) => setEmail(e.target.value)} // Capture email input
+            onChange={(e) => setEmail(e.target.value)}
           />
-
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t("login_password_label")}</label>
           <input
             type="password"
             id="password"
-            placeholder="Enter your password"
+            placeholder={t("login_password_placeholder")}
             required
             value={password}
-            onChange={(e) => setPassword(e.target.value)} // Capture password input
+            onChange={(e) => setPassword(e.target.value)}
           />
-
-          <button type="submit">Login</button>
+          <button type="submit">{t("login_button_text")}</button>
         </form>
         <div className="social-login">
           <button className="button-social">
@@ -81,12 +77,12 @@ const Login = () => {
           </button>
         </div>
         <p>
-          Don’t have an account yet? <a href="/register">Register now</a>
+          {t("login_no_account_text")}{" "}
+          <a href="/register">{t("login_register_link_text")}</a>
         </p>
       </div>
       <div className="login-image">
         <div className="clip"></div>
-        {/* <img src={image} alt="Login" /> */}
       </div>
     </div>
   );

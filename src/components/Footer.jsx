@@ -50,7 +50,9 @@ const Footer = () => {
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b094eb7d1e67323b84df6b4879ba6f1715dc4f7411c2a062984eaaeb0691ea2?"
                     className="footer-contact-icon"
                   />
-                  <div className="footer-contact-info">info@foundit.in</div>
+                  <div className="footer-contact-info">
+                    contact@wadhifty.com
+                  </div>
                 </div>
                 <div className="footer-contact-item">
                   <img
@@ -59,18 +61,8 @@ const Footer = () => {
                     className="footer-contact-icon"
                   />
                   <div className="footer-contact-info">
-                    Toll No: +91-40-66116611
+                    Toll No: +966 00966545025506
                     <br />
-                  </div>
-                </div>
-                <div className="footer-contact-item">
-                  <img
-                    loading="lazy"
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/6d2cc0565e7833f9beb503e24339e75752b50d739474385deaab2e266e0de1cd?"
-                    className="footer-contact-icon"
-                  />
-                  <div className="footer-contact-info">
-                    Toll Free No: 1-800-4196666
                   </div>
                 </div>
               </div>

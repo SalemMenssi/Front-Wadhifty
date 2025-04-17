@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./styles/login.css";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
-// Import your register function from the API
+import { useNavigate } from "react-router-dom";
 import image from "../Assets/Images/intro.png";
 import { register } from "../Utility/UserAPI";
 import { Alert } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
-  // State variables for the form fields
+  const { t } = useTranslation();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -16,14 +16,13 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
-  const navigation = useNavigate(); // For navigation after registration
+  const navigation = useNavigate();
 
-  // Handle form submission
   const handleRegister = async (e) => {
-    e.preventDefault(); // Prevent page reload on form submit
+    e.preventDefault();
 
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match.");
+      setErrorMessage(t("register_arlafy.password_mismatch"));
       setShowAlert(true);
       setTimeout(() => setShowAlert(false), 3000);
       return;
@@ -35,19 +34,16 @@ const Register = () => {
       const response = await register(userData);
       if (response && response.token) {
         localStorage.setItem("authToken", response.token);
-        navigation("/"); // Redirect to the homepage or desired page
+        navigation("/");
       }
     } catch (error) {
-      setErrorMessage(error.response?.data?.msg || "Something went wrong!");
+      setErrorMessage(
+        error.response?.data?.msg || t("register_arlafy.error_default")
+      );
       setShowAlert(true);
-
-      // Hide the alert after 3 seconds
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 3000); // 3000ms = 3 seconds
+      setTimeout(() => setShowAlert(false), 3000);
     }
 
-    // Reset form fields
     setFullName("");
     setEmail("");
     setPhoneNumber("");
@@ -58,7 +54,7 @@ const Register = () => {
   return (
     <div className="login-container">
       <div className="login-form" style={{ margin: 0, padding: 0 }}>
-        <h2>Register</h2>
+        <h2>{t("register_arlafy.title")}</h2>
         <div style={{ position: "absolute", top: 0, right: 0, width: "30%" }}>
           {showAlert && (
             <Alert severity="error" className="fadeAlert">
@@ -67,65 +63,67 @@ const Register = () => {
           )}
         </div>
         <form onSubmit={handleRegister}>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">{t("register_arlafy.name")}</label>
           <input
             type="text"
             id="name"
-            placeholder="Enter your name"
+            placeholder={t("register_arlafy.name_placeholder")}
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
           />
 
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t("register_arlafy.email")}</label>
           <input
             type="email"
             id="email"
-            placeholder="Enter your email"
+            placeholder={t("register_arlafy.email_placeholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
 
-          <label htmlFor="phone">Phone</label>
+          <label htmlFor="phone">{t("register_arlafy.phone")}</label>
           <input
             type="tel"
             id="phone"
-            placeholder="Enter your phone number"
+            placeholder={t("register_arlafy.phone_placeholder")}
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
             required
           />
 
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t("register_arlafy.password")}</label>
           <input
             type="password"
             id="password"
-            placeholder="Enter your password"
+            placeholder={t("register_arlafy.password_placeholder")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
 
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">
+            {t("register_arlafy.confirm_password")}
+          </label>
           <input
             type="password"
             id="confirmPassword"
-            placeholder="Confirm your password"
+            placeholder={t("register_arlafy.confirm_password_placeholder")}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
 
-          <button type="submit">Register</button>
+          <button type="submit">{t("register_arlafy.submit")}</button>
         </form>
         <p style={{ margin: 0, padding: 0 }}>
-          Already have an account? <a href="/login">Login here</a>
+          {t("register_arlafy.already_have_account")}{" "}
+          <a href="/login">{t("register_arlafy.login_here")}</a>
         </p>
       </div>
       <div className="login-image">
         <div className="clip"></div>
-        {/* <img src={image} alt="Login" /> */}
       </div>
     </div>
   );

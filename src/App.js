@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { getUserById } from "./Utility/UserAPI";
 import "./i18n";
+import i18n from "./i18n";
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -42,9 +43,9 @@ function App() {
 
     return () => clearInterval(intervalId);
   }, [isAdmin]);
-
+  const isArabic = i18n.language === "ar";
   return (
-    <div className="App">
+    <div style={{ fontFamily: isArabic ? "Rubik" : "inherit" }} className="App">
       <Routes>
         <Route path="/*" element={isAdmin ? <IndexAdmin /> : <Index />} />
         <Route path="/login" element={<Login />} />

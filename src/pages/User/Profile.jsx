@@ -66,16 +66,21 @@ const Profile = () => {
     }
   };
 
-  const handleCvChange = (e) => {
-    setCv(e.target.files[0]);
+  // Only open the file dialog
+  const handleUpload = () => {
+    document.getElementById("cvInput").click();
   };
 
-  const handleUpload = async () => {
-    document.getElementById("cvInput").click();
-    if (!cv) return;
+  // Trigger upload after file selection
+  const handleCvChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setCv(file);
+    document.getElementById("cvInput").value = null; // allow re-selecting the same file
 
     const formData = new FormData();
-    formData.append("pdf", cv);
+    formData.append("pdf", file);
 
     setUploading(true);
     setMessage("");
@@ -87,6 +92,10 @@ const Profile = () => {
 
       const response = await uploadPDF(formData);
       await changeResume(currentId, response.file._id);
+
+      const updatedUser = { ...user, resume: response.file };
+      await updateUser(currentId, updatedUser);
+      setUser(updatedUser);
       setMessage("Upload successful!");
     } catch (error) {
       console.error("Upload error:", error);
@@ -197,6 +206,7 @@ const Profile = () => {
               id="cvInput"
               style={{ display: "none" }}
               onChange={handleCvChange}
+              accept="application/pdf"
             />
           </div>
           {cv && (
@@ -206,6 +216,7 @@ const Profile = () => {
               </p>
             </div>
           )}
+          {message && <p className="upload-message">{message}</p>}
         </div>
       </div>
 

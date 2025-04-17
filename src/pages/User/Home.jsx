@@ -6,9 +6,9 @@ import image from "../../Assets/Images/newHome.png";
 import Button from "../../components/Button";
 import LandBar from "../../components/LandBar";
 import vedio from "../../Assets/gifs/vedio.mp4";
-import applayIMG from "../../Assets/Images/foundit 1.png";
-import BagIMG from "../../Assets/Images/Foundit 1s.png";
-import MessageIMG from "../../Assets/Images/Message Icon.png";
+import applayIMG from "../../Assets/Icons/8.png";
+import BagIMG from "../../Assets/Icons/2.png";
+import MessageIMG from "../../Assets/Icons/6.png";
 import resumeBar from "../../Assets/Images/ResumeBar.png";
 
 import SearchBar from "../../components/SearchBar";
@@ -49,7 +49,12 @@ const Home = () => {
         <div className="right-side">
           <h1>{t("welcome_title")}</h1>
           <p>{t("welcome_text")}</p>
-          <Button text={t("get_started")} onClick={handleClick} />
+          <div
+            style={{ display: "flex", justifyContent: "flex-end" }}
+            className="btn-box-ar"
+          >
+            <Button text={t("get_started")} onClick={handleClick} />
+          </div>
         </div>
         <div className="left-side">
           <img src={image} alt="Placeholder" />

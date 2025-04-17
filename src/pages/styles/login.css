@@ -20,6 +20,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  right: 0;
 }
 .login-image .clip {
   clip-path: polygon(30% 0, 100% 0%, 100% 100%, 6% 100%);
