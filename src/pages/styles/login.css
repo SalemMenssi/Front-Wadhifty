@@ -15,6 +15,19 @@
 .fadeAlert .hidden {
   opacity: 0;
 }
+.password-container {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+.password-toggle {
+  right: 20px;
+  position: absolute;
+  margin-bottom: 10px;
+}
+.password-toggle:hover {
+  cursor: pointer;
+}
 .login-image {
   flex: 1;
   display: flex;

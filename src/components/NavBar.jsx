@@ -39,7 +39,6 @@ const NavBar = () => {
     return () => clearInterval(intervalId);
   }, [isAuth]);
 
-  // 🛠 Listen for language changes and update the state
   useEffect(() => {
     const updateLanguage = () => setLanguage(i18n.language);
     i18n.on("languageChanged", updateLanguage);

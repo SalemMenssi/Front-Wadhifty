@@ -111,5 +111,26 @@
   "register_arlafy.already_have_account": "Vous avez déjà un compte ?",
   "register_arlafy.login_here": "Connectez-vous ici",
   "register_arlafy.password_mismatch": "Les mots de passe ne correspondent pas.",
-  "register_arlafy.error_default": "Une erreur s'est produite !"
+  "register_arlafy.error_default": "Une erreur s'est produite !",
+  "footer": {
+    "product": "Produit",
+    "non_it_jobs": "Emplois non informatiques",
+    "it_jobs": "Emplois informatiques",
+    "job_seekers": "Chercheurs d'emploi",
+    "employers": "Employeurs",
+    "company": "Entreprise",
+    "about_us": "À propos de nous",
+    "contact_us": "Nous contacter",
+    "send_feedback": "Envoyer des retours",
+    "html_sitemap": "Plan du site HTML",
+    "xml_sitemap": "Plan du site XML",
+    "get_in_touch": "Contactez-nous",
+    "security_fraud": "Sécurité et fraude",
+    "privacy_policy": "Politique de confidentialité",
+    "terms_of_use": "Conditions d'utilisation",
+    "beware_of_fraudsters": "Méfiez-vous des fraudeurs",
+    "be_safe": "Soyez prudent",
+    "complaints": "Réclamations"
+  },
+  "new_jobs_available": "Nouvelles offres d'emploi disponibles"
 }

@@ -1,6 +1,6 @@
 {
   "welcome_title": "مرحبًا بك في موقعنا",
-  "welcome_text": "! مرحباً بك في موقع وظيفتي، بوابتك إلى أفضل الفرص الوظيفية في دول الخليج",
+  "welcome_text": " مرحباً بك في موقع وظيفتي، بوابتك إلى أفضل الفرص الوظيفية في دول الخليج",
   "get_started": "ابدأ الآن",
   "video_not_supported": "المتصفح لا يدعم تشغيل الفيديو.",
   "section_title": "أسهل طريقة للعثور على وظيفة مع منصتنا",
@@ -46,9 +46,9 @@
   "sidepub-join-button": "انضم إلينا",
   "jobs-title": "ابحث عن الوظيفة التي تناسب طموحك اليوم!",
   "jobs-subtitle": "هل تبحث عن وظيفة الآن؟",
-  "jobs-description": "اكتب اسم الوظيفة أو الشركة أو الفئة الوظيفية التي تبحث عنها.",
+  "jobs-description": "اكتب اسم الوظيفة أو الشركة أو الفئة الوظيفية التي تبحث عنها",
   "jobs-choose-title": "اختر من وظائفنا المتاحة",
-  "jobs-choose-description": "ابحث عن الوظيفة التي تناسبك وتقدم بطلب الآن.",
+  "jobs-choose-description": "ابحث عن الوظيفة التي تناسبك وتقدم بطلب الآن",
   "jobs-available-title": "الوظائف المتاحة",
   "contact-title": "اتصل بنا",
   "contact-fullName": "الاسم الكامل",
@@ -112,5 +112,26 @@
   "register_arlafy.already_have_account": "لديك حساب بالفعل؟",
   "register_arlafy.login_here": "سجّل الدخول من هنا",
   "register_arlafy.password_mismatch": "كلمتا المرور غير متطابقتين.",
-  "register_arlafy.error_default": "حدث خطأ ما!"
+  "register_arlafy.error_default": "حدث خطأ ما!",
+  "footer": {
+    "product": "المنتج",
+    "non_it_jobs": "وظائف غير تقنية",
+    "it_jobs": "وظائف تقنية",
+    "job_seekers": "باحثين عن وظائف",
+    "employers": "أرباب العمل",
+    "company": "الشركة",
+    "about_us": "من نحن",
+    "contact_us": "اتصل بنا",
+    "send_feedback": "إرسال ملاحظات",
+    "html_sitemap": "خريطة الموقع HTML",
+    "xml_sitemap": "خريطة الموقع XML",
+    "get_in_touch": "ابق على اتصال",
+    "security_fraud": "الأمن والاحتيال",
+    "privacy_policy": "سياسة الخصوصية",
+    "terms_of_use": "شروط الاستخدام",
+    "beware_of_fraudsters": "احترس من المحتالين",
+    "be_safe": "كن آمناً",
+    "complaints": "الشكاوى"
+  },
+  "new_jobs_available": "وظائف جديدة متاحة"
 }

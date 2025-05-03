@@ -5,8 +5,10 @@ import instagram from "../Assets/Icons/instagram.svg";
 import linkedin from "../Assets/Icons/linkedin.svg";
 import twiter from "../Assets/Icons/twitter.svg";
 import youtube from "../Assets/Icons/youtube.svg";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <div className="footer-container">
       <div className="footer-content">
@@ -24,26 +26,50 @@ const Footer = () => {
           <div className="footer-links">
             <div className="footer-column">
               <div className="footer-category">
-                <div className="footer-category-title">Product</div>
-                <div className="footer-category-item">Non IT jobs</div>
-                <div className="footer-category-item">IT jobs</div>
-                <div className="footer-category-item">Job Seekers</div>
-                <div className="footer-category-item">Employers</div>
+                <div className="footer-category-title">
+                  {t("footer.product")}
+                </div>
+                <div className="footer-category-item">
+                  {t("footer.non_it_jobs")}
+                </div>
+                <div className="footer-category-item">
+                  {t("footer.it_jobs")}
+                </div>
+                <div className="footer-category-item">
+                  {t("footer.job_seekers")}
+                </div>
+                <div className="footer-category-item">
+                  {t("footer.employers")}
+                </div>
               </div>
             </div>
             <div className="footer-column">
               <div className="footer-category">
-                <div className="footer-category-title">Company</div>
-                <div className="footer-category-item">About us</div>
-                <div className="footer-category-item">Contact us</div>
-                <div className="footer-category-item">Send feedback</div>
-                <div className="footer-category-item">HTML Sitemap</div>
-                <div className="footer-category-item">XML Sitemap</div>
+                <div className="footer-category-title">
+                  {t("footer.company")}
+                </div>
+                <div className="footer-category-item">
+                  {t("footer.about_us")}
+                </div>
+                <div className="footer-category-item">
+                  {t("footer.contact_us")}
+                </div>
+                <div className="footer-category-item">
+                  {t("footer.send_feedback")}
+                </div>
+                <div className="footer-category-item">
+                  {t("footer.html_sitemap")}
+                </div>
+                <div className="footer-category-item">
+                  {t("footer.xml_sitemap")}
+                </div>
               </div>
             </div>
             <div className="footer-column">
               <div className="footer-category">
-                <div className="footer-category-title">Get in touch</div>
+                <div className="footer-category-title">
+                  {t("footer.get_in_touch")}
+                </div>
                 <div className="footer-contact-item">
                   <img
                     loading="lazy"
@@ -72,12 +98,14 @@ const Footer = () => {
       </div>
       <div className="footer-divider" />
       <div className="footer-links-small">
-        <div className="footer-link-item">Security & fraud</div>
-        <div className="footer-link-item">Privacy policy</div>
-        <div className="footer-link-item">Terms of Use</div>
-        <div className="footer-link-item">Beware of Fraudsters</div>
-        <div className="footer-link-item">Be Safe</div>
-        <div className="footer-link-item">Complaints</div>
+        <div className="footer-link-item">{t("footer.security_fraud")}</div>
+        <div className="footer-link-item">{t("footer.privacy_policy")}</div>
+        <div className="footer-link-item">{t("footer.terms_of_use")}</div>
+        <div className="footer-link-item">
+          {t("footer.beware_of_fraudsters")}
+        </div>
+        <div className="footer-link-item">{t("footer.be_safe")}</div>
+        <div className="footer-link-item">{t("footer.complaints")}</div>
       </div>
       <div className="footer-divider" />
       <div className="footer-bottom">

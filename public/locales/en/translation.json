@@ -111,5 +111,26 @@
   "register_arlafy.already_have_account": "Already have an account?",
   "register_arlafy.login_here": "Login here",
   "register_arlafy.password_mismatch": "Passwords do not match.",
-  "register_arlafy.error_default": "Something went wrong!"
+  "register_arlafy.error_default": "Something went wrong!",
+  "footer": {
+    "product": "Product",
+    "non_it_jobs": "Non IT jobs",
+    "it_jobs": "IT jobs",
+    "job_seekers": "Job Seekers",
+    "employers": "Employers",
+    "company": "Company",
+    "about_us": "About us",
+    "contact_us": "Contact us",
+    "send_feedback": "Send feedback",
+    "html_sitemap": "HTML Sitemap",
+    "xml_sitemap": "XML Sitemap",
+    "get_in_touch": "Get in touch",
+    "security_fraud": "Security & Fraud",
+    "privacy_policy": "Privacy Policy",
+    "terms_of_use": "Terms of Use",
+    "beware_of_fraudsters": "Beware of Fraudsters",
+    "be_safe": "Be Safe",
+    "complaints": "Complaints"
+  },
+  "new_jobs_available": "New jobs available"
 }

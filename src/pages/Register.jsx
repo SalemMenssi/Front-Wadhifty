@@ -5,7 +5,7 @@ import image from "../Assets/Images/intro.png";
 import { register } from "../Utility/UserAPI";
 import { Alert } from "@mui/material";
 import { useTranslation } from "react-i18next";
-
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 const Register = () => {
   const { t } = useTranslation();
   const [fullName, setFullName] = useState("");
@@ -15,6 +15,8 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigation = useNavigate();
 
@@ -94,27 +96,45 @@ const Register = () => {
           />
 
           <label htmlFor="password">{t("register_arlafy.password")}</label>
-          <input
-            type="password"
-            id="password"
-            placeholder={t("register_arlafy.password_placeholder")}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="password-container">
+            <input
+              style={{ width: "100%" }}
+              type={showPassword ? "text" : "password"}
+              id="password"
+              placeholder={t("login_password_placeholder")}
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <a
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+            </a>
+          </div>
 
           <label htmlFor="confirmPassword">
             {t("register_arlafy.confirm_password")}
           </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            placeholder={t("register_arlafy.confirm_password_placeholder")}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
 
+          <div className="password-container">
+            <input
+              style={{ width: "100%" }}
+              type={showConfirmPassword ? "text" : "password"}
+              id="password"
+              placeholder={t("register_arlafy.confirm_password_placeholder")}
+              required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <a
+              className="password-toggle"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+            </a>
+          </div>
           <button type="submit">{t("register_arlafy.submit")}</button>
         </form>
         <p style={{ margin: 0, padding: 0 }}>

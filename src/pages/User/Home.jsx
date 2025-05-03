@@ -17,6 +17,7 @@ import JobBox from "../../components/JobBox";
 import { FiArrowRight } from "react-icons/fi";
 import SidePub from "../../components/SidePub";
 import { getAllJobs } from "../../Utility/JobsAPI";
+import NewJobsAlert from "../../components/NewJobsAlert"; // Import the new component
 
 const categories = [
   { name: "Software", jobCount: 120 },
@@ -45,6 +46,7 @@ const Home = () => {
 
   return (
     <div>
+      <NewJobsAlert />
       <div className="landing-page">
         <div className="right-side">
           <h1>{t("welcome_title")}</h1>

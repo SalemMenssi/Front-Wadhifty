@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import "./styles/login.css";
-import image from "../Assets/Images/intro.png";
-import googleIcon from "../Assets/Icons/flat-color-icons_google.svg";
-import FacebookIcon from "../Assets/Icons/bi_facebook.svg";
+// import image from "../Assets/Images/intro.png";
+// import googleIcon from "../Assets/Icons/flat-color-icons_google.svg";
+// import FacebookIcon from "../Assets/Icons/bi_facebook.svg";
 import { login } from "../Utility/UserAPI";
 import { useNavigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import { useTranslation } from "react-i18next";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import eye icons
 
 const Login = () => {
   const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // For confirm password
   const [errorMessage, setErrorMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigation = useNavigate();
 
   const handleLogin = async (e) => {
@@ -34,6 +38,7 @@ const Login = () => {
     }
     setEmail("");
     setPassword("");
+    setConfirmPassword(""); // Reset confirm password
   };
 
   return (
@@ -58,24 +63,34 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <label htmlFor="password">{t("login_password_label")}</label>
-          <input
-            type="password"
-            id="password"
-            placeholder={t("login_password_placeholder")}
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="password-container">
+            <input
+              style={{ width: "100%" }}
+              type={showPassword ? "text" : "password"}
+              id="password"
+              placeholder={t("login_password_placeholder")}
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <a
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+            </a>
+          </div>
+
           <button type="submit">{t("login_button_text")}</button>
         </form>
-        <div className="social-login">
+        {/* <div className="social-login">
           <button className="button-social">
             <img src={googleIcon} alt="google" />
           </button>
           <button className="button-social">
             <img src={FacebookIcon} alt="Facebook" />
           </button>
-        </div>
+        </div> */}
         <p>
           {t("login_no_account_text")}{" "}
           <a href="/register">{t("login_register_link_text")}</a>
