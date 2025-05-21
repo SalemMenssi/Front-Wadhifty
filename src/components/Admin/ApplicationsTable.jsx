@@ -14,12 +14,13 @@ import {
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { URL } from "../../URL";
+
 import {
   deleteApplication,
   getAllApplications,
   updateApplicationStatus,
 } from "../../Utility/ApplicationsAPI";
+import { URL } from "../../URL";
 
 const ApplicationsTable = () => {
   const [data, setData] = useState([]);
@@ -118,8 +119,8 @@ const ApplicationsTable = () => {
                     border: "none", // Removes border
                   }}
                 >
-                  <TableCell>{app.user.fullName}</TableCell>
-                  <TableCell>{app.user.phoneNumber}</TableCell>
+                  <TableCell>{app.user && app.user.fullName}</TableCell>
+                  <TableCell>{app.user && app.user.phoneNumber}</TableCell>
                   <TableCell>{app.job.company}</TableCell>
                   <TableCell>
                     <Select
@@ -140,7 +141,9 @@ const ApplicationsTable = () => {
 
                   <TableCell>
                     <a
-                      href={`${URL}${app.user.resume && app.user.resume.url}`}
+                      href={`${URL}${
+                        app.user && app.user.resume && app.user.resume.url
+                      }`}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
