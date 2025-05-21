@@ -19,17 +19,48 @@ import {
   faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { applyForJob } from "../../Utility/ApplicationsAPI";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Snackbar, Alert } from "@mui/material";
 
 const ViewJobDetailsModal = ({ user, open, handleClose, job }) => {
   const { t } = useTranslation(); // Initialize translation hook
+  const [isAuth, setIsAuth] = useState();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const handleApply = async () => {
-    await applyForJob({ jobId: job._id, userId: user._id });
-    handleClose();
+  const isAuthchek = async () => {
+    const token = await localStorage.getItem("authToken");
+    setIsAuth(token ? true : false);
   };
+  const handleApply = async () => {
+    try {
+      await applyForJob({ jobId: job._id, userId: user._id });
+      setOpenSnackbar(true); // Show success snackbar
+    } catch (error) {
+      console.error("Application failed:", error);
+    }
+  };
+
+  useEffect(() => {
+    isAuthchek();
+  }, [isAuth]);
 
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {t("applied_successfully")} {/* Add this key to your i18n files */}
+        </Alert>
+      </Snackbar>
       <Paper elevation={3} style={{ padding: "20px", borderRadius: "10px" }}>
         <DialogTitle>
           <Typography variant="h5" fontWeight="bold" color="primary">
@@ -69,10 +100,11 @@ const ViewJobDetailsModal = ({ user, open, handleClose, job }) => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleApply} variant="contained" color="success">
-            {t("apply_now")}
-          </Button>
-
+          {isAuth && (
+            <Button onClick={handleApply} variant="contained" color="success">
+              {t("apply_now")}
+            </Button>
+          )}
           <Button onClick={handleClose} variant="contained" color="primary">
             {t("close")}
           </Button>

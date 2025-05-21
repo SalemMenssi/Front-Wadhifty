@@ -132,5 +132,6 @@
     "be_safe": "Be Safe",
     "complaints": "Complaints"
   },
-  "new_jobs_available": "New jobs available"
+  "new_jobs_available": "New jobs available",
+  "applied_successfully": "You have applied successfully!"
 }

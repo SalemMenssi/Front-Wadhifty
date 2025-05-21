@@ -22,10 +22,12 @@ const Jobs = () => {
 
   return (
     <div className="jobs">
-      <div className="header-jobs">
+      {/* <div className="header-jobs">
         <h1>{t("jobs-title")}</h1>
-      </div>
-      <h2 style={{ marginBottom: "1em" }}>{t("jobs-subtitle")}</h2>
+      </div> */}
+      <h2 style={{ marginBottom: "1em", marginTop: "3em" }}>
+        {t("jobs-subtitle")}
+      </h2>
       <p>{t("jobs-description")}</p>
       <div className="column">
         <SearchBar />
@@ -35,9 +37,9 @@ const Jobs = () => {
       <CategoryList categories={[]} />
       <h2 style={{ marginBottom: "1em" }}>{t("jobs-available-title")}</h2>
       <JobBox data={jobs} />
-      <div className="pagination-index">
+      {/* <div className="pagination-index">
         <Pagination count={10} color="primary" />
-      </div>
+      </div> */}
     </div>
   );
 };

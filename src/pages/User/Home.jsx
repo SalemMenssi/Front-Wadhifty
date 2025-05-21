@@ -37,13 +37,16 @@ const Home = () => {
 
   const GetJobs = async () => {
     const data = await getAllJobs();
-    setJobs(data);
+    setJobs(data.slice(2));
   };
 
   useEffect(() => {
     GetJobs();
   }, []);
-
+  const handleSeemore = async () => {
+    const token = localStorage.getItem("authToken");
+    token ? navigation("/jobs") : navigation("/login");
+  };
   return (
     <div>
       <NewJobsAlert />
@@ -102,7 +105,7 @@ const Home = () => {
       <p>{t("find_suitable_job")}</p>
       <CategoryList categories={categories} />
       <JobBox data={jobs} />
-      <a href="#" className="see-more-button">
+      <a onClick={() => handleSeemore()} className="see-more-button">
         {t("see_more")} <FiArrowRight />
       </a>
       <SidePub />
